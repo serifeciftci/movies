@@ -18,16 +18,10 @@ public class Movie {
     private int runtime;
     private String imdb;
 
-//    @Enumerated(EnumType.STRING)
-//    @ElementCollection(targetClass = Genre.class)
-//    @CollectionTable(name = "MOVIEGENRES",
-//            joinColumns = @JoinColumn(name = "movieId"))
-//    @Column(name = "GENRE")
-//    private List<Genre> genres = new ArrayList<Genre>();
-
     @Enumerated(EnumType.STRING)
     @ElementCollection
-    @CollectionTable(name = "MOVIEGENRES",
+    @CollectionTable(
+            name = "MOVIEGENRES",
             joinColumns = @JoinColumn(name = "movieId"))
     @Column(name = "GENRE")
     private List<Genre> genres = new ArrayList<Genre>();

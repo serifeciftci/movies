@@ -2,6 +2,7 @@ package com.sogeti.api.dao;
 
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
+import com.sogeti.api.util.Genre;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,68 +26,78 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
     public List<Movie> findMovieByInterests(Interest interest) {
         List<Movie> recommendationsList = new ArrayList<Movie>();
 
-        if (interest.getActors() != null) {
-            List<Movie> list = findByActorName(interest);
-            addToList(list, recommendationsList);
-        }
-
-        if (interest.getGender() != null) {
-            List<Movie> list = findByGender(interest);
-            addToList(list, recommendationsList);
-        }
+//        if (interest.getActors() != null) {
+//            addToList(findByActor(interest), recommendationsList);
+//        }
+//
+//        if (interest.getGender() != null) {
+//            addToList(findByGender(interest), recommendationsList);
+//        }
 
         if (interest.getGenres() != null) {
-//            List<Movie> list = findByGenre(interest);
-//            for(Movie movie : list) {
-//                movieList.add(movie);
-//            }
+            addToList(findByGenre(interest), recommendationsList);
         }
+
+//        if (interest.getRatings() != null) {
+//            addToList(findByRating(interest), recommendationsList);
+//        }
+//
+//        if (interest.getRuntime() != null) {
+//            addToList(findByRuntime(interest), recommendationsList);
+//        }
 
         return recommendationsList;
     }
 
-
-    private List<Movie> findByActorName(Interest interest) {
+    private List<Movie> findByActor(Interest interest) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Movie> query =
-                currentSession.createQuery("select m from Movie m join m.actors ma where ma.name=:name", Movie.class);
+        Query<Movie> query = currentSession.createQuery("select m from Movie m join m.actors ma where ma.name=:name", Movie.class);
         query.setParameter("name", interest.getActors());
-        List<Movie> movie = query.getResultList();
 
-        return movie;
+        return query.getResultList();
     }
 
     private List<Movie> findByGender(Interest interest) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Movie> query =
-                currentSession.createQuery("select m from Movie m join m.actors ma where ma.gender=:gender", Movie.class);
+        Query<Movie> query = currentSession.createQuery("select m from Movie m join m.actors ma where ma.gender=:gender", Movie.class);
         query.setParameter("gender", interest.getGender());
-        List<Movie> movie = query.getResultList();
 
-        return movie;
+        return query.getResultList();
     }
 
     private List<Movie> findByGenre(Interest interest) {
         Session currentSession = entityManager.unwrap(Session.class);
-        System.out.println("interest: " + interest);
 
-        Query<Movie> query =
-//                currentSession.createQuery("select m from Movie m join m.genres mg where m.genres=:genre", Movie.class);
-                currentSession.createQuery("select m from Movie m where m.genres=:genre", Movie.class);
-        System.out.println("RRR: " + interest.getGenres());
-        query.setParameter("genre", interest.getGenres());
+        Query<Movie> query = currentSession.createQuery("select m from Movie m join m.genres mg where m.genres=:genre", Movie.class);
+        query.setParameter("genre", Genre.Action);
 
-        System.out.println("XXX: " + query.getResultList());
+        return query.getResultList();
+    }
 
+    private List<Movie> findByRating(Interest interest) {
+        Session currentSession = entityManager.unwrap(Session.class);
 
-        List<Movie> movie = query.getResultList();
+        Query<Movie> query = currentSession.createQuery("select m from Movie m where m.rating>=:rating", Movie.class);
+        query.setParameter("rating", Float.valueOf(interest.getRatings()));
 
-        return movie;
+        return query.getResultList();
+    }
+
+    private List<Movie> findByRuntime(Interest interest) {
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Movie> query = currentSession.createQuery("select m from Movie m where m.runtime<=:runtime", Movie.class);
+        query.setParameter("runtime", Integer.parseInt(interest.getRuntime()));
+
+        return query.getResultList();
     }
 
     private void addToList(List<Movie> list, List<Movie> recommendationsList) {
+        System.out.println("----------------");
+        System.out.println("list: " + list);
+        System.out.println("recommendationsList: " + recommendationsList);
         for(Movie movie : list) {
             if(!recommendationsList.contains(movie)) {
                 recommendationsList.add(movie);

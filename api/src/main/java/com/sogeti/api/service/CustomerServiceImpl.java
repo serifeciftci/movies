@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> customer = findById(Integer.parseInt(customerId));
         Interest interest = customer.get().getInterests().get(0);
 
-        // assumption: column ratings contains format "x" or "x+" where x is a digit
+        // assumption: column ratings contains format "x+" where x is a digit
         if (interest.getRatings() != null && !interest.getRatings().isEmpty()) {
             if (interest.getRatings().substring(interest.getRatings().length() - 1).equals("+")) {
                 interest.setRatings(interest.getRatings().substring(0, interest.getRatings().length() - 1));
