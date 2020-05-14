@@ -44,10 +44,11 @@ public class CustomerServiceImpl implements CustomerService {
             if (dtoInterest.getGenres() != null) {
                 interest.setGenres(Genre.valueOf(dtoInterest.getGenres()));
             }
-//            interest.setGenres(dtoInterest.getGenres());
+
             interest.setActors(dtoInterest.getActors());
             interest.setRatings(dtoInterest.getRatings());
             interest.setRuntime(dtoInterest.getRuntime());
+
             if (dtoInterest.getGender() != null) {
                 interest.setGender(Gender.valueOf(dtoInterest.getGender()));
             }
@@ -82,8 +83,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         List<Movie> movies = customQueryDao.findMovieByInterests(interest);
-        return convertToRecommendation(movies);
 
+        return convertToRecommendation(movies);
     }
 
     private List<MovieRecommendation> convertToRecommendation(List<Movie> movies) {

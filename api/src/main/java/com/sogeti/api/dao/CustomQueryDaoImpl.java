@@ -2,7 +2,6 @@ package com.sogeti.api.dao;
 
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
-import com.sogeti.api.util.Genre;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,25 +25,26 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
     public List<Movie> findMovieByInterests(Interest interest) {
         List<Movie> recommendationsList = new ArrayList<Movie>();
 
-//        if (interest.getActors() != null) {
-//            addToList(findByActor(interest), recommendationsList);
-//        }
-//
-//        if (interest.getGender() != null) {
-//            addToList(findByGender(interest), recommendationsList);
-//        }
-
-        if (interest.getGenres() != null) {
-            addToList(findByGenre(interest), recommendationsList);
+        if (interest.getActors() != null) {
+            addToList(findByActor(interest), recommendationsList);
         }
 
-//        if (interest.getRatings() != null) {
-//            addToList(findByRating(interest), recommendationsList);
+        if (interest.getGender() != null) {
+            addToList(findByGender(interest), recommendationsList);
+        }
+
+//        Couldn't get the findByGenre to work
+//        if (interest.getGenres() != null) {
+//            addToList(findByGenre(interest), recommendationsList);
 //        }
-//
-//        if (interest.getRuntime() != null) {
-//            addToList(findByRuntime(interest), recommendationsList);
-//        }
+
+        if (interest.getRatings() != null) {
+            addToList(findByRating(interest), recommendationsList);
+        }
+
+        if (interest.getRuntime() != null) {
+            addToList(findByRuntime(interest), recommendationsList);
+        }
 
         return recommendationsList;
     }
@@ -70,8 +70,8 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
     private List<Movie> findByGenre(Interest interest) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<Movie> query = currentSession.createQuery("select m from Movie m join m.genres mg where m.genres=:genre", Movie.class);
-        query.setParameter("genre", Genre.Action);
+        Query<Movie> query = currentSession.createQuery("select m from Movie m where m.genres=:genre", Movie.class);
+        query.setParameter("genre", interest.getGenres());
 
         return query.getResultList();
     }
@@ -95,9 +95,6 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
     }
 
     private void addToList(List<Movie> list, List<Movie> recommendationsList) {
-        System.out.println("----------------");
-        System.out.println("list: " + list);
-        System.out.println("recommendationsList: " + recommendationsList);
         for(Movie movie : list) {
             if(!recommendationsList.contains(movie)) {
                 recommendationsList.add(movie);
@@ -105,13 +102,6 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
         }
     }
 }
-
-
-// 1001 - 1
-// 1002 - 1 2 3
-// 1003 - 1 2
-// 1004 - 2
-// 1005 - 3
 
 
 
