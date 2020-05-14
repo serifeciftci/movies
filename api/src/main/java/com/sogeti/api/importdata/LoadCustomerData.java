@@ -34,6 +34,8 @@ public class LoadCustomerData implements CommandLineRunner {
                 customerService.save(customer);
             });
 
+            logger.info("Finished saving data from profiles.json into database");
+
         } catch (IOException e) {
             logger.error("Unable to read profiles.json :" + e);
         }

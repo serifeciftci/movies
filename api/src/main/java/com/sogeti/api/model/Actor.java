@@ -1,11 +1,8 @@
-package com.sogeti.api.entity;
+package com.sogeti.api.model;
 
 import com.sogeti.api.util.Gender;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Actor {
@@ -15,6 +12,8 @@ public class Actor {
     private int actorId;
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     public Actor() {}

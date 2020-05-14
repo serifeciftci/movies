@@ -1,4 +1,4 @@
-package com.sogeti.api.entity;
+package com.sogeti.api.model;
 
 import com.sogeti.api.util.Genre;
 
@@ -18,11 +18,18 @@ public class Movie {
     private int runtime;
     private String imdb;
 
+//    @Enumerated(EnumType.STRING)
+//    @ElementCollection(targetClass = Genre.class)
+//    @CollectionTable(name = "MOVIEGENRES",
+//            joinColumns = @JoinColumn(name = "movieId"))
+//    @Column(name = "GENRE")
+//    private List<Genre> genres = new ArrayList<Genre>();
+
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Genre.class)
+    @ElementCollection
     @CollectionTable(name = "MOVIEGENRES",
             joinColumns = @JoinColumn(name = "movieId"))
-    @Column(name = "GENREID")
+    @Column(name = "GENRE")
     private List<Genre> genres = new ArrayList<Genre>();
 
     @ManyToMany(cascade = CascadeType.ALL)

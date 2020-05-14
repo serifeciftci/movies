@@ -1,6 +1,6 @@
 package com.sogeti.api.dao;
 
-import com.sogeti.api.entity.Movie;
+import com.sogeti.api.model.Movie;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

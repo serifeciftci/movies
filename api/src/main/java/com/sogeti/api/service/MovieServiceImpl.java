@@ -1,8 +1,8 @@
 package com.sogeti.api.service;
 
 import com.sogeti.api.dao.MovieDao;
-import com.sogeti.api.dto.Movie;
-import com.sogeti.api.entity.Actor;
+import com.sogeti.api.model.Actor;
+import com.sogeti.api.model.Movie;
 import com.sogeti.api.util.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public void save(Movie dtoMovie) {
-        com.sogeti.api.entity.Movie movie = convert(dtoMovie);
+    public void save(com.sogeti.api.dto.Movie dtoMovie) {
+        Movie movie = convert(dtoMovie);
         movieDao.save(movie);
     }
 
-    public com.sogeti.api.entity.Movie convert(Movie dtoMovie) {
-        com.sogeti.api.entity.Movie movie = new com.sogeti.api.entity.Movie();
+    public Movie convert(com.sogeti.api.dto.Movie dtoMovie) {
+        Movie movie = new Movie();
 
         movie.setTitle(dtoMovie.getTitle());
         movie.setRating(dtoMovie.getRating());

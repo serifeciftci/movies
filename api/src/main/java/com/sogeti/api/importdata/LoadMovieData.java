@@ -15,6 +15,8 @@ import javax.xml.bind.Unmarshaller;
 
 @Component
 public class LoadMovieData implements CommandLineRunner {
+    private Logger logger = LoggerFactory.getLogger(LoadCustomerData.class);
+
     @Value("classpath:input/movies.xml")
     private Resource resource;
 
@@ -31,5 +33,6 @@ public class LoadMovieData implements CommandLineRunner {
             movieService.save(movie);
         });
 
+        logger.info("Finished saving data from movies.xml into database");
     }
 }

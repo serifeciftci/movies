@@ -1,4 +1,4 @@
-package com.sogeti.api.entity;
+package com.sogeti.api.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,8 +11,9 @@ public class Customer {
     private String name;
 
     @OneToMany(targetEntity=Interest.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "CUSTOMERINTERESTS", joinColumns = { @JoinColumn(name = "customerId") }, inverseJoinColumns = {
-            @JoinColumn(name = "interestId") })
+    @JoinTable(name = "CUSTOMERINTERESTS",
+            joinColumns = { @JoinColumn(name = "customerId") },
+            inverseJoinColumns = { @JoinColumn(name = "interestId") })
     private List<Interest> interests;
 
     public Customer() {}

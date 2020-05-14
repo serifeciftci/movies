@@ -1,9 +1,9 @@
-package com.sogeti.api.entity;
+package com.sogeti.api.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sogeti.api.util.Gender;
+import com.sogeti.api.util.Genre;
+
+import javax.persistence.*;
 
 @Entity
 public class Interest {
@@ -12,11 +12,14 @@ public class Interest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String genres;
+    @Enumerated(EnumType.STRING)
+    private Genre genres;
     private String actors;
     private String ratings;
     private String runtime;
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     public int getId() {
         return id;
@@ -26,11 +29,11 @@ public class Interest {
         this.id = id;
     }
 
-    public String getGenres() {
+    public Genre getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
+    public void setGenres(Genre genres) {
         this.genres = genres;
     }
 
@@ -58,11 +61,11 @@ public class Interest {
         this.runtime = runtime;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
