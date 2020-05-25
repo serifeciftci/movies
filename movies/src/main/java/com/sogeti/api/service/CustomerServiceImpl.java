@@ -7,7 +7,7 @@ import com.sogeti.api.dto.InterestDto;
 import com.sogeti.api.model.Customer;
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
-import com.sogeti.api.model.MovieRecommendation;
+import com.sogeti.api.dto.MovieRecommendation;
 import com.sogeti.api.util.Gender;
 import com.sogeti.api.util.Genre;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,7 +10,7 @@ public class Interest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int interestId;
 
     @Enumerated(EnumType.STRING)
     private Genre genres;
@@ -21,12 +21,12 @@ public class Interest {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public int getId() {
-        return id;
+    public int getInterestId() {
+        return interestId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInterestId(int interestId) {
+        this.interestId = interestId;
     }
 
     public Genre getGenres() {
@@ -72,7 +72,7 @@ public class Interest {
     @Override
     public String toString() {
         return "Interest{" +
-                "id=" + id +
+                "id=" + interestId +
                 ", genres='" + genres + '\'' +
                 ", actors='" + actors + '\'' +
                 ", ratings='" + ratings + '\'' +

@@ -1,7 +1,7 @@
 package com.sogeti.api.service;
 
 import com.sogeti.api.dto.CustomerDto;
-import com.sogeti.api.model.MovieRecommendation;
+import com.sogeti.api.dto.MovieRecommendation;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.sogeti.api.resource;
 
-import com.sogeti.api.model.MovieRecommendation;
+import com.sogeti.api.dto.MovieRecommendation;
 import com.sogeti.api.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

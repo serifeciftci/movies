@@ -1,4 +1,4 @@
-package com.sogeti.api.model;
+package com.sogeti.api.dto;
 
 public class MovieRecommendation {
 
