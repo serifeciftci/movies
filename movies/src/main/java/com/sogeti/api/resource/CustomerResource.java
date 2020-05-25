@@ -14,11 +14,15 @@ import java.util.List;
 @RequestMapping("/api/yourapp/v1/movie")
 public class CustomerResource {
 
-    @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/suggestion/customer/id/{id}")
-    public List<MovieRecommendation> getSuggestionById(@PathVariable String id) {
-        return customerService.findRecommendation(id);
+    @Autowired
+    CustomerResource(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    @GetMapping("/suggestion/customer/id/{customerId}")
+    public List<MovieRecommendation> getSuggestionById(@PathVariable String customerId) {
+        return customerService.findRecommendation(customerId);
     }
 }

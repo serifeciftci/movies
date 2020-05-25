@@ -8,16 +8,16 @@ import java.util.List;
 
 @XmlRootElement(name = "movies")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Movies {
+public class MoviesDto {
 
     @XmlElement(name = "movie")
-    private List<Movie> movie;
+    private List<MovieDto> movie;
 
-    public List<Movie> getMovie() {
+    public List<MovieDto> getMovie() {
         return movie;
     }
 
-    public void setMovie(List<Movie> movie) {
+    public void setMovie(List<MovieDto> movie) {
         this.movie = movie;
     }
 

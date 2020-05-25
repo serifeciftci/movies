@@ -1,11 +1,11 @@
 package com.sogeti.api.service;
 
-import com.sogeti.api.dto.Customer;
+import com.sogeti.api.dto.CustomerDto;
 import com.sogeti.api.model.MovieRecommendation;
 
 import java.util.List;
 
 public interface CustomerService {
-    void save(Customer customer);
+    void save(CustomerDto customer);
     List<MovieRecommendation> findRecommendation(String customerId);
 }

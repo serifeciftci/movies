@@ -3,15 +3,15 @@ package com.sogeti.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public class CustomerDto {
 
     private int customer_id;
     private String name;
-    private List<Interest> interests = new ArrayList();
+    private List<InterestDto> interests = new ArrayList();
 
-    public Customer() {}
+    public CustomerDto() {}
 
-    public Customer(int customer_id, String name, List<Interest> interests) {
+    public CustomerDto(int customer_id, String name, List<InterestDto> interests) {
         this.customer_id = customer_id;
         this.name = name;
         this.interests = interests;
@@ -33,11 +33,11 @@ public class Customer {
         this.name = name;
     }
 
-    public List<Interest> getInterests() {
+    public List<InterestDto> getInterests() {
         return interests;
     }
 
-    public void setInterests(List<Interest> interests) {
+    public void setInterests(List<InterestDto> interests) {
         this.interests = interests;
     }
 

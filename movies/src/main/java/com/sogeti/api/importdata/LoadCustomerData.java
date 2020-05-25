@@ -2,7 +2,7 @@ package com.sogeti.api.importdata;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sogeti.api.dto.Customer;
+import com.sogeti.api.dto.CustomerDto;
 import com.sogeti.api.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,24 +17,24 @@ import java.util.List;
 @Component
 public class LoadCustomerData implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(LoadCustomerData.class);
+    private CustomerService customerService;
 
     @Autowired
-    CustomerService customerService;
+    private LoadCustomerData(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @Override
     public void run(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        TypeReference<List<Customer>> typeReference = new TypeReference<List<Customer>>() {
-        };
+        TypeReference<List<CustomerDto>> typeReference = new TypeReference<List<CustomerDto>>() {};
 
         try (InputStream inputStream = getClass().getResourceAsStream("/input/profiles.json")) {
-            List<Customer> customers = mapper.readValue(inputStream, typeReference);
+            List<CustomerDto> customers = mapper.readValue(inputStream, typeReference);
 
             customers.stream().forEach(customer -> {
                 customerService.save(customer);
             });
-
-            logger.info("Finished saving data from profiles.json into database");
 
         } catch (IOException e) {
             logger.error("Unable to read profiles.json :" + e);

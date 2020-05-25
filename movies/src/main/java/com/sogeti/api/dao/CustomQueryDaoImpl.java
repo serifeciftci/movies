@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class CustomQueryDaoImpl implements CustomQueryDao {
 
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
     public CustomQueryDaoImpl(EntityManager entityManager){
@@ -32,11 +32,6 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
         if (interest.getGender() != null) {
             addToList(findByGender(interest), recommendationsList);
         }
-
-//        Couldn't get the findByGenre to work
-//        if (interest.getGenres() != null) {
-//            addToList(findByGenre(interest), recommendationsList);
-//        }
 
         if (interest.getRatings() != null) {
             addToList(findByRating(interest), recommendationsList);
@@ -63,15 +58,6 @@ public class CustomQueryDaoImpl implements CustomQueryDao {
 
         Query<Movie> query = currentSession.createQuery("select m from Movie m join m.actors ma where ma.gender=:gender", Movie.class);
         query.setParameter("gender", interest.getGender());
-
-        return query.getResultList();
-    }
-
-    private List<Movie> findByGenre(Interest interest) {
-        Session currentSession = entityManager.unwrap(Session.class);
-
-        Query<Movie> query = currentSession.createQuery("select m from Movie m where m.genres=:genre", Movie.class);
-        query.setParameter("genre", interest.getGenres());
 
         return query.getResultList();
     }

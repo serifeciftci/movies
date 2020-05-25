@@ -1,9 +1,7 @@
 package com.sogeti.api.importdata;
 
-import com.sogeti.api.dto.Movies;
+import com.sogeti.api.dto.MoviesDto;
 import com.sogeti.api.service.MovieService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -15,24 +13,25 @@ import javax.xml.bind.Unmarshaller;
 
 @Component
 public class LoadMovieData implements CommandLineRunner {
-    private Logger logger = LoggerFactory.getLogger(LoadCustomerData.class);
 
     @Value("classpath:input/movies.xml")
     private Resource resource;
 
-    @Autowired
     private MovieService movieService;
+
+    @Autowired
+    public LoadMovieData(MovieService movieService){
+        this.movieService = movieService;
+    }
 
     @Override
     public void run(String[] args) throws Exception {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Movies.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(MoviesDto.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Movies movies = (Movies) jaxbUnmarshaller.unmarshal(resource.getFile());
+        MoviesDto movies = (MoviesDto) jaxbUnmarshaller.unmarshal(resource.getFile());
 
         movies.getMovie().stream().forEach(movie -> {
             movieService.save(movie);
         });
-
-        logger.info("Finished saving data from movies.xml into database");
     }
 }

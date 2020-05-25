@@ -1,6 +1,6 @@
 package com.sogeti.api.dto;
 
-public class Interest {
+public class InterestDto {
 
     private String genres;
     private String actors;

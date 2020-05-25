@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "actor")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Actor {
+public class ActorDto {
 
     private String name;
     private String gender;
 
-    public Actor() {}
+    public ActorDto() {}
 
-    public Actor(String name, String gender) {
+    public ActorDto(String name, String gender) {
         this.name = name;
         this.gender = gender;
     }

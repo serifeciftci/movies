@@ -8,11 +8,11 @@ import java.util.List;
 
 @XmlRootElement(name = "movie")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Movie {
+public class MovieDto {
 
     private String title;
     private List<Genre> genres = new ArrayList<Genre>();
-    private List<Actor> actors = new ArrayList<Actor>();
+    private List<ActorDto> actors = new ArrayList<ActorDto>();
     private float rating;
     private int runtime;
     private String imdb;
@@ -37,11 +37,11 @@ public class Movie {
 
     @XmlElementWrapper(name = "actors")
     @XmlElement(name = "actor")
-    public List<Actor> getActors() {
+    public List<ActorDto> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(List<ActorDto> actors) {
         this.actors = actors;
     }
 

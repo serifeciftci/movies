@@ -2,6 +2,8 @@ package com.sogeti.api.service;
 
 import com.sogeti.api.dao.CustomQueryDao;
 import com.sogeti.api.dao.CustomerDao;
+import com.sogeti.api.dto.CustomerDto;
+import com.sogeti.api.dto.InterestDto;
 import com.sogeti.api.model.Customer;
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
@@ -18,39 +20,41 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
     private CustomerDao customerDao;
-
-    @Autowired
     private CustomQueryDao customQueryDao;
 
-    @Override
-    public void save(com.sogeti.api.dto.Customer dtoCustomer) {
-        Customer customer = convert(dtoCustomer);
-        customerDao.save(customer);
+    @Autowired
+    public CustomerServiceImpl(CustomerDao customerDao, CustomQueryDao customQueryDao) {
+        this.customerDao = customerDao;
+        this.customQueryDao = customQueryDao;
     }
 
-    private Customer convert(com.sogeti.api.dto.Customer dtoCustomer) {
+    @Override
+    public void save(CustomerDto customerDto) {
+        customerDao.save(convert(customerDto));
+    }
+
+    private Customer convert(CustomerDto customerDto) {
         Customer customer = new Customer();
 
-        customer.setCustomerId(dtoCustomer.getCustomer_id());
-        customer.setName(dtoCustomer.getName());
+        customer.setCustomerId(customerDto.getCustomer_id());
+        customer.setName(customerDto.getName());
 
         List<Interest> interests = new ArrayList<Interest>();
 
-        for (com.sogeti.api.dto.Interest dtoInterest : dtoCustomer.getInterests()) {
+        for (InterestDto interestDto : customerDto.getInterests()) {
             Interest interest = new Interest();
 
-            if (dtoInterest.getGenres() != null) {
-                interest.setGenres(Genre.valueOf(dtoInterest.getGenres()));
+            if (interestDto.getGenres() != null) {
+                interest.setGenres(Genre.valueOf(interestDto.getGenres()));
             }
 
-            interest.setActors(dtoInterest.getActors());
-            interest.setRatings(dtoInterest.getRatings());
-            interest.setRuntime(dtoInterest.getRuntime());
+            interest.setActors(interestDto.getActors());
+            interest.setRatings(interestDto.getRatings());
+            interest.setRuntime(interestDto.getRuntime());
 
-            if (dtoInterest.getGender() != null) {
-                interest.setGender(Gender.valueOf(dtoInterest.getGender()));
+            if (interestDto.getGender() != null) {
+                interest.setGender(Gender.valueOf(interestDto.getGender()));
             }
 
             interests.add(interest);
