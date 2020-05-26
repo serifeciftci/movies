@@ -32,11 +32,11 @@ public class Movie {
             name = "MOVIEGENRES",
             joinColumns = @JoinColumn(name = "movieId"))
     @Column(name = "GENRE")
-    private List<Genre> genres = new ArrayList<Genre>();
+    private List<Genre> genres = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "MOVIEACTOR",
             joinColumns = { @JoinColumn(name = "movieId") },
             inverseJoinColumns = { @JoinColumn(name = "actorId") })
-    private List<Actor> actors = new ArrayList<Actor>();
+    private List<Actor> actors = new ArrayList<>();
 }

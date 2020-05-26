@@ -1,6 +1,6 @@
 package com.sogeti.api.controller;
 
-import com.sogeti.api.dto.MovieRecommendation;
+import com.sogeti.api.dto.MovieRecommendationDto;
 import com.sogeti.api.service.CustomerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class CustomerController {
     }
 
     @GetMapping("/id/{customerId}")
-    public List<MovieRecommendation> getSuggestionById(@PathVariable String customerId) {
+    public List<MovieRecommendationDto> getSuggestionById(@PathVariable String customerId) {
         return customerService.findRecommendation(customerId);
     }
 }

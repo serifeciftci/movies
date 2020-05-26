@@ -7,7 +7,7 @@ import com.sogeti.api.dto.InterestDto;
 import com.sogeti.api.model.Customer;
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
-import com.sogeti.api.dto.MovieRecommendation;
+import com.sogeti.api.dto.MovieRecommendationDto;
 import com.sogeti.api.util.Gender;
 import com.sogeti.api.util.Genre;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setCustomerId(customerDto.getCustomer_id());
         customer.setName(customerDto.getName());
 
-        List<Interest> interests = new ArrayList<Interest>();
+        List<Interest> interests = new ArrayList<>();
 
         for (InterestDto interestDto : customerDto.getInterests()) {
             Interest interest = new Interest();
@@ -68,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<MovieRecommendation> findRecommendation(String customerId) {
+    public List<MovieRecommendationDto> findRecommendation(String customerId) {
         Optional<Customer> customer = findById(Integer.parseInt(customerId));
         Interest interest = customer.get().getInterests().get(0);
 
@@ -89,11 +89,11 @@ public class CustomerServiceImpl implements CustomerService {
         return convertToRecommendation(movies);
     }
 
-    private List<MovieRecommendation> convertToRecommendation(List<Movie> movies) {
-        List<MovieRecommendation> recommendations = new ArrayList<MovieRecommendation>();
+    private List<MovieRecommendationDto> convertToRecommendation(List<Movie> movies) {
+        List<MovieRecommendationDto> recommendations = new ArrayList<>();
 
         for (Movie movie : movies) {
-            MovieRecommendation recommendation = new MovieRecommendation();
+            MovieRecommendationDto recommendation = new MovieRecommendationDto();
             recommendation.setTitle(movie.getTitle());
             recommendation.setImdb(movie.getImdb());
             recommendations.add(recommendation);

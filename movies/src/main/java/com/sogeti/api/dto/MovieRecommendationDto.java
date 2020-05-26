@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MovieRecommendation {
+public class MovieRecommendationDto {
 
     private String title;
     private String imdb;

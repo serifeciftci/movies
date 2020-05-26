@@ -15,5 +15,5 @@ import java.util.List;
 public class CustomerDto {
     private int customer_id;
     private String name;
-    private List<InterestDto> interests = new ArrayList();
+    private List<InterestDto> interests = new ArrayList<>();
 }

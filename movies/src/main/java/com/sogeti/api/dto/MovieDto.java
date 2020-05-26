@@ -19,8 +19,8 @@ import java.util.List;
 public class MovieDto {
 
     private String title;
-    private List<Genre> genres = new ArrayList<Genre>();
-    private List<ActorDto> actors = new ArrayList<ActorDto>();
+    private List<Genre> genres = new ArrayList<>();
+    private List<ActorDto> actors = new ArrayList<>();
     private float rating;
     private int runtime;
     private String imdb;

@@ -21,7 +21,7 @@ public class CustomQueryRepositoryImpl implements CustomQueryRepository {
 
     @Override
     public List<Movie> findMovieByInterests(Interest interest) {
-        List<Movie> recommendationsList = new ArrayList<Movie>();
+        List<Movie> recommendationsList = new ArrayList<>();
 
         if (interest.getActors() != null) {
             addToList(findByActor(interest), recommendationsList);
