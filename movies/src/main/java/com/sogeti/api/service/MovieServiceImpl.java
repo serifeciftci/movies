@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;

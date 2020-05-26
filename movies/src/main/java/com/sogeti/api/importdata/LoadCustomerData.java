@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class LoadCustomerData implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(LoadCustomerData.class);
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     private LoadCustomerData(CustomerService customerService) {
         this.customerService = customerService;

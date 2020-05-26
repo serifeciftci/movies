@@ -16,7 +16,7 @@ public class LoadMovieData implements CommandLineRunner {
     @Value("classpath:input/movies.xml")
     private Resource resource;
 
-    private MovieService movieService;
+    private final MovieService movieService;
 
     public LoadMovieData(MovieService movieService){
         this.movieService = movieService;

@@ -19,8 +19,8 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private CustomerRepository customerRepository;
-    private CustomQueryRepository customQueryRepository;
+    private final CustomerRepository customerRepository;
+    private final CustomQueryRepository customQueryRepository;
 
     public CustomerServiceImpl(CustomerRepository customerRepository, CustomQueryRepository customQueryRepository) {
         this.customerRepository = customerRepository;
