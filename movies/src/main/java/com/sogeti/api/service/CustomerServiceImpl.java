@@ -1,7 +1,7 @@
 package com.sogeti.api.service;
 
-import com.sogeti.api.dao.CustomQueryDao;
-import com.sogeti.api.dao.CustomerDao;
+import com.sogeti.api.repository.CustomQueryRepository;
+import com.sogeti.api.repository.CustomerRepository;
 import com.sogeti.api.dto.CustomerDto;
 import com.sogeti.api.dto.InterestDto;
 import com.sogeti.api.model.Customer;
@@ -20,18 +20,18 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private CustomerDao customerDao;
-    private CustomQueryDao customQueryDao;
+    private CustomerRepository customerRepository;
+    private CustomQueryRepository customQueryRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerDao customerDao, CustomQueryDao customQueryDao) {
-        this.customerDao = customerDao;
-        this.customQueryDao = customQueryDao;
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomQueryRepository customQueryRepository) {
+        this.customerRepository = customerRepository;
+        this.customQueryRepository = customQueryRepository;
     }
 
     @Override
     public void save(CustomerDto customerDto) {
-        customerDao.save(convert(customerDto));
+        customerRepository.save(convert(customerDto));
     }
 
     private Customer convert(CustomerDto customerDto) {
@@ -66,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private Optional<Customer> findById(int customerId) {
-        return customerDao.findById(customerId);
+        return customerRepository.findById(customerId);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
             interest.setRuntime(interest.getRuntime().replaceAll("\\D+",""));
         }
 
-        List<Movie> movies = customQueryDao.findMovieByInterests(interest);
+        List<Movie> movies = customQueryRepository.findMovieByInterests(interest);
 
         return convertToRecommendation(movies);
     }

@@ -1,10 +1,10 @@
-package com.sogeti.api.dao;
+package com.sogeti.api.repository;
 
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
 
 import java.util.List;
 
-public interface CustomQueryDao {
+public interface CustomQueryRepository {
     List<Movie> findMovieByInterests(Interest interest);
 }

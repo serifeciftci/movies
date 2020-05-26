@@ -1,6 +1,6 @@
 package com.sogeti.api.service;
 
-import com.sogeti.api.dao.MovieDao;
+import com.sogeti.api.repository.MovieRepository;
 import com.sogeti.api.dto.ActorDto;
 import com.sogeti.api.dto.MovieDto;
 import com.sogeti.api.model.Actor;
@@ -15,17 +15,17 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private MovieDao movieDao;
+    private MovieRepository movieRepository;
 
     @Autowired
-    MovieServiceImpl(MovieDao movieDao) {
-        this.movieDao = movieDao;
+    MovieServiceImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     @Override
     public void save(MovieDto movieDto) {
         Movie movie = convert(movieDto);
-        movieDao.save(movie);
+        movieRepository.save(movie);
     }
 
     public Movie convert(MovieDto movieDto) {

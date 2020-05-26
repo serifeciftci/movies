@@ -1,4 +1,4 @@
-package com.sogeti.api.dao;
+package com.sogeti.api.repository;
 
 import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CustomQueryDaoImpl implements CustomQueryDao {
+public class CustomQueryRepositoryImpl implements CustomQueryRepository {
 
     private EntityManager entityManager;
 
     @Autowired
-    public CustomQueryDaoImpl(EntityManager entityManager){
+    public CustomQueryRepositoryImpl(EntityManager entityManager){
         this.entityManager = entityManager;
     }
 
