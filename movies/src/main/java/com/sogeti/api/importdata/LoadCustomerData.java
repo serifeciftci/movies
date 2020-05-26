@@ -6,7 +6,6 @@ import com.sogeti.api.dto.CustomerDto;
 import com.sogeti.api.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ public class LoadCustomerData implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(LoadCustomerData.class);
     private CustomerService customerService;
 
-    @Autowired
     private LoadCustomerData(CustomerService customerService) {
         this.customerService = customerService;
     }

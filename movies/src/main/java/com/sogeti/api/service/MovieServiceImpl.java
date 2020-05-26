@@ -6,7 +6,6 @@ import com.sogeti.api.dto.MovieDto;
 import com.sogeti.api.model.Actor;
 import com.sogeti.api.model.Movie;
 import com.sogeti.api.util.Gender;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieRepository movieRepository;
 
-    @Autowired
     MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }

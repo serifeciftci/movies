@@ -10,7 +10,6 @@ import com.sogeti.api.model.Movie;
 import com.sogeti.api.dto.MovieRecommendation;
 import com.sogeti.api.util.Gender;
 import com.sogeti.api.util.Genre;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
     private CustomQueryRepository customQueryRepository;
 
-    @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository, CustomQueryRepository customQueryRepository) {
         this.customerRepository = customerRepository;
         this.customQueryRepository = customQueryRepository;

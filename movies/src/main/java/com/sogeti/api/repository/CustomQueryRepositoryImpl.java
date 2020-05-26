@@ -4,7 +4,6 @@ import com.sogeti.api.model.Interest;
 import com.sogeti.api.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,7 +15,6 @@ public class CustomQueryRepositoryImpl implements CustomQueryRepository {
 
     private EntityManager entityManager;
 
-    @Autowired
     public CustomQueryRepositoryImpl(EntityManager entityManager){
         this.entityManager = entityManager;
     }

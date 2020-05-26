@@ -2,7 +2,6 @@ package com.sogeti.api.importdata;
 
 import com.sogeti.api.dto.MoviesDto;
 import com.sogeti.api.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
@@ -19,7 +18,6 @@ public class LoadMovieData implements CommandLineRunner {
 
     private MovieService movieService;
 
-    @Autowired
     public LoadMovieData(MovieService movieService){
         this.movieService = movieService;
     }
