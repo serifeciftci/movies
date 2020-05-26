@@ -1,23 +1,21 @@
-package com.sogeti.api.resource;
+package com.sogeti.api.controller;
 
 import com.sogeti.api.dto.MovieRecommendation;
 import com.sogeti.api.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/yourapp/v1/movie")
-public class CustomerResource {
+public class CustomerController {
 
     private CustomerService customerService;
 
     @Autowired
-    CustomerResource(CustomerService customerService) {
+    CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 

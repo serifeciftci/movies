@@ -13,3 +13,7 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+server:
+  servlet:
+    context-path: /api/yourapp/v1/movie
+
