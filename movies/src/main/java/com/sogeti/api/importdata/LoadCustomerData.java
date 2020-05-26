@@ -30,12 +30,9 @@ public class LoadCustomerData implements CommandLineRunner {
         try (InputStream inputStream = getClass().getResourceAsStream("/input/profiles.json")) {
             List<CustomerDto> customers = mapper.readValue(inputStream, typeReference);
 
-            customers.stream().forEach(customer -> {
-                customerService.save(customer);
-            });
-
+            customers.forEach(customerService::save);
         } catch (IOException e) {
-            logger.error("Unable to read profiles.json :" + e);
+            logger.error("Unable to read profiles.json : {}", e);
         }
     }
 }

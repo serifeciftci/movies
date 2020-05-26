@@ -28,8 +28,6 @@ public class LoadMovieData implements CommandLineRunner {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         MoviesDto movies = (MoviesDto) jaxbUnmarshaller.unmarshal(resource.getFile());
 
-        movies.getMovie().stream().forEach(movie -> {
-            movieService.save(movie);
-        });
+        movies.getMovie().forEach(movieService::save);
     }
 }

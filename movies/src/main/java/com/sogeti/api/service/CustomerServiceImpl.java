@@ -21,6 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomQueryRepository customQueryRepository;
     private final MovieMapper movieMapper;
     private final CustomerMapper customerMapper;
+    private final String regex = "\\D+";
 
     public CustomerServiceImpl(CustomerRepository customerRepository,
                                CustomQueryRepository customQueryRepository,
@@ -48,14 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
 
         // assumption: column ratings contains format "x+" where x is a digit
         if (interest.getRatings() != null && !interest.getRatings().isEmpty()) {
-            if (interest.getRatings().substring(interest.getRatings().length() - 1).equals("+")) {
+            if (interest.getRatings().endsWith("+")) {
                 interest.setRatings(interest.getRatings().substring(0, interest.getRatings().length() - 1));
             }
         }
 
         // assumption: column runtime contains format "< xxx minutes"
         if (interest.getRuntime() != null && !interest.getRuntime().isEmpty()) {
-            interest.setRuntime(interest.getRuntime().replaceAll("\\D+",""));
+            interest.setRuntime(interest.getRuntime().replaceAll(regex,""));
         }
 
         List<Movie> movies = customQueryRepository.findMovieByInterests(interest);
